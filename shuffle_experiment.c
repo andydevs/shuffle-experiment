@@ -6,7 +6,7 @@
 /**
  * The path of the file
  */
-#define FILE_PATH "C:\\Users\\akans\\Documents\\MATLAB\\data.csv"
+#define FILE_PATH ".\\data.csv"
 
 /**
  * Initial values of the experiment
