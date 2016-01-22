@@ -59,7 +59,14 @@ void shuffle(int array[], int length, int times);
 int insertion_sort(int array[], int length);
 
 
-
+/**
+ * The main method of the program
+ *
+ * Parameter: argc - the number of arguments passed to the main method
+ * Parameter: argv - the command line arguments passed to the main method
+ *
+ * Return: the exit status of the program
+ */
 int main(int argc, char const *argv[])
 {
 	// Initialize buffers
