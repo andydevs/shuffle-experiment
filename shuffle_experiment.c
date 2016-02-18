@@ -107,10 +107,10 @@ int main(int argc, char *argv[])
 	//---------------------------------BEGIN EXPERIMENT---------------------------------
 
 	// Write options to file
-	fprintf(options, "%i,%i,%i,%i,%i\n", ARRAY_LENGTH_MIN,
-								      	 ARRAY_LENGTH_MAX,
-								      	 SHUFFLE_TIMES_MIN,
+	fprintf(options, "%i,%i,%i,%i,%i\n", SHUFFLE_TIMES_MIN,
 								      	 SHUFFLE_TIMES_MAX,
+										 ARRAY_LENGTH_MIN,
+								      	 ARRAY_LENGTH_MAX,
 								      	 SHUFFLE_TRIALS);
 
 	// Seed random number generator
