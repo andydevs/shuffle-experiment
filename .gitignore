@@ -33,3 +33,6 @@
 
 # Data files
 .csv
+
+# Stackdump files
+.exe.stackdump

@@ -13,4 +13,4 @@ $(TARGET): $(OBJECTS)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 clean:
-	rm $(TARGET) $(TARGET).exe.stackdump data.csv options.csv
+	rm $(OBJECTS) $(TARGET) $(TARGET).exe.stackdump data.csv
