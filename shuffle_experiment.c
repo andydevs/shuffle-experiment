@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 
+#define DEFAILT_FILEPATH "."
+
 /**
- * The path of the file
+ * The name of the file containing data
  */
-#define FILE_PATH ".\\data.csv"
+#define DATA_FILENAME "\\data.csv"
+
+/**
+ * The name of the file containing options
+ */
+#define OPTIONS_FILENAME "\\options.csv"
 
 /**
  * Initial values of the experiment
@@ -18,16 +26,15 @@
  * SHUFFLE_TRIALS    - Number of shuffle trials to perform in each experiment
  */
 const int ARRAY_LENGTH_MIN = 10,
-		  ARRAY_LENGTH_MAX = 100,
+		  ARRAY_LENGTH_MAX = 20,
 		  SHUFFLE_TIMES_MIN = 10,
-		  SHUFFLE_TIMES_MAX = 200,
-		  SHUFFLE_TRIALS = 100;
+		  SHUFFLE_TIMES_MAX = 20,
+		  SHUFFLE_TRIALS = 10;
 
 /**
- * The data file to write
+ * The data and option files to write
  */
-FILE *data;
-
+FILE *data, *options;
 
 /**
  * Swaps the two values at the given indeces with each other in the array
@@ -67,28 +74,52 @@ int insertion_sort(int array[], int length);
  *
  * Return: the exit status of the program
  */
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
 	// Initialize buffers
 	int swap_buffer;
 	int array_buffer[ARRAY_LENGTH_MAX];
+	char data_file_path[100], options_file_path[100];
 
-	// Open data file
-	data = fopen(FILE_PATH, "w");
+	//---------------------------------INITIALIZE FILES---------------------------------
 
-	// Write initial data to file
-	fprintf(data, "%i,%i,%i,%i,%i\n", ARRAY_LENGTH_MIN,
-								      ARRAY_LENGTH_MAX,
-								      SHUFFLE_TIMES_MIN,
-								      SHUFFLE_TIMES_MAX,
-								      SHUFFLE_TRIALS);
+	// Store given filepath if filepath is given
+	// Else store default filepath
+	if (argc == 2)
+	{
+		sprintf(data_file_path, argv[1]);
+		sprintf(options_file_path, argv[1]);	
+	}
+	else
+	{
+		sprintf(data_file_path, DEFAILT_FILEPATH);
+		sprintf(options_file_path, DEFAILT_FILEPATH);
+	}
 
+	// Concatenate filenames to path
+	strcat(data_file_path, DATA_FILENAME);
+	strcat(options_file_path, OPTIONS_FILENAME);
+
+	// Initialize files with filenames
+	data = fopen(data_file_path, "w+");
+	options = fopen(options_file_path, "w+");
+
+	//---------------------------------BEGIN EXPERIMENT---------------------------------
+
+	// Write options to file
+	fprintf(options, "%i,%i,%i,%i,%i\n", ARRAY_LENGTH_MIN,
+								      	 ARRAY_LENGTH_MAX,
+								      	 SHUFFLE_TIMES_MIN,
+								      	 SHUFFLE_TIMES_MAX,
+								      	 SHUFFLE_TRIALS);
 
 	// Seed random number generator
 	srand(time(NULL));
 
 	// For every array length from ARRAY_LENGTH_MIN through ARRAY_LENGTH_MAX
-	for (int array_length = ARRAY_LENGTH_MIN; array_length <= ARRAY_LENGTH_MAX; array_length++)
+	for (int array_length = ARRAY_LENGTH_MIN; 
+			 array_length <= ARRAY_LENGTH_MAX; 
+			 array_length++)
 	{
 		// Initialize array for experiment
 		for (int i = 0; i < array_length; ++i)
@@ -96,11 +127,12 @@ int main(int argc, char const *argv[])
 			array_buffer[i] = i;
 		}
 
-
-		// -----------------------PERFORM SHUFFLE EXPERIMENT ON ARRAY----------------------------
+		// ---------------------------------PERFORM SHUFFLE EXPERIMENT ON ARRAY---------------------------------
 
 		// For each number of shuffle times from SHUFFLE_TIMES_MIN to SHUFFLE_TIMES_MAX
-		for (int shuffle_times = SHUFFLE_TIMES_MIN; shuffle_times <= SHUFFLE_TIMES_MAX; ++shuffle_times)
+		for (int shuffle_times = SHUFFLE_TIMES_MIN; 
+				 shuffle_times <= SHUFFLE_TIMES_MAX; 
+				 shuffle_times++)
 		{
 			// Compute average swaps of all shuffle trials
 			swap_buffer = 0;
@@ -118,8 +150,9 @@ int main(int argc, char const *argv[])
 		fprintf(data, "\n");
 	}
 
-	// Close file
+	// Close data and options files
 	fclose(data);
+	fclose(options);
 
 	return 0;
 }
@@ -155,13 +188,12 @@ void shuffle(int array[], int length, int times)
 	for (int i = 0; i < times; ++i)
 	{
 		// Create two distinct random indeces from 0 to length - 1
-		rand_a = rand() % length;
-		rand_b = rand() % length;
-		while(rand_a == rand_b)
+		do
 		{
 			rand_a = rand() % length;
 			rand_b = rand() % length;
-		}
+		} 
+		while (rand_a == rand_b);
 
 		// Swap array at random indeces
 		swap(array, rand_a, rand_b);
@@ -176,7 +208,7 @@ void shuffle(int array[], int length, int times)
  */
 int insertion_sort(int array[], int length)
 {
-	// Initialize swap buffers
+	// Initialize swap counter
 	int swaps = 0;
 
 	// For each position after the first
@@ -193,6 +225,6 @@ int insertion_sort(int array[], int length)
 		}
 	}
 
-	// Returns the number of swaps
+	// Return the number of swaps
 	return swaps;
 }
