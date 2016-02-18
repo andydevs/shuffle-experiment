@@ -7,3 +7,5 @@ I intend to do the opposite, figuring out how to shuffle an array of numbers suc
 I've created an algorithm that takes two random inceces in the array and swaps them, what I call a shuffle.
 
 This is an experiment to determine how many times a sorted array of arbitrary length must be shuffled to produce the maximum "randomness" in the array.
+
+Since this isn't a release-bound project, I haven't included a license.
