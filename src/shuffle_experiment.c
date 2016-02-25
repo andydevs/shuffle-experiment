@@ -1,3 +1,6 @@
+#include "program_constants.h"
+#include "array_shuffle_functions.h"
+
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +11,7 @@
 /**
  * The default filepath of the files
  */
-#define DEFAILT_FILEPATH "."
+#define DEFAILT_FILEPATH "..\\analysis"
 
 /**
  * The name of the file containing data
@@ -21,54 +24,9 @@
 #define OPTIONS_FILENAME "\\options.csv"
 
 /**
- * Initial values of the experiment
- *
- * SHUFFLE_TIMES_MIN - Minimum number of shuffle times to test
- * SHUFFLE_TIMES_MAX - Maximum number of shuffle times to test
- * ARRAY_LENGTH_MIN  - Minimum array length to test
- * ARRAY_LENGTH_MAX  - Maximum array length to test
- * SHUFFLE_TRIALS    - Number of shuffle trials to perform in each experiment
- */
-const int SHUFFLE_TIMES_MIN,
-		  SHUFFLE_TIMES_MAX,
-		  ARRAY_LENGTH_MIN,
-		  ARRAY_LENGTH_MAX,
-		  SHUFFLE_TRIALS;
-
-/**
  * The data and option files to write
  */
 FILE *data, *options;
-
-/**
- * Swaps the two values at the given indeces with each other in the array
- *
- * Parameter: array - the array in which to swap values 
- * Parameter: a     - the first index to swap
- * Parameter: b     - the second index to swap
- */
-void swap(int array[], int a, int b);
-
-/**
- * Shuffles the values in the given array with the given length for the given number of times
- * Each shuffle time, we pick two random indeces in the array to swap.
- * 
- * Parameter: array  - the array to shuffle
- * Parameter: length - the length of the array to shuffle
- * Parameter: times  - the number of times to shuffle the array
- */
-void shuffle(int array[], int length, int times);
-
-/**
- * Sorts the values in the given array with the given length in ascending order
- *
- * Parameter: array  - the array to sort
- * Parameter: length - the length of the array to sort
- *
- * Returns: the number of swaps made to sort the array
- */
-int insertion_sort(int array[], int length);
-
 
 /**
  * The main method of the program
@@ -189,76 +147,4 @@ int main(int argc, char *argv[])
 
 	// End program
 	return 0;
-}
-
-/**
- * Swaps the two values at the given indeces with each other in the array
- *
- * Parameter: array - the array in which to swap values 
- * Parameter: a     - the first index to swap
- * Parameter: b     - the second index to swap
- */
-void swap(int array[], int a, int b)
-{
-	int temp = array[a];
-	array[a] = array[b];
-	array[b] = temp;
-}
-
-/**
- * Shuffles the values in the given array with the given length for the given number of times
- * Each shuffle time, we pick two random indeces in the array to swap.
- * 
- * Parameter: array  - the array to shuffle
- * Parameter: length - the length of the array to shuffle
- * Parameter: times  - the number of times to shuffle the array
- */
-void shuffle(int array[], int length, int times)
-{
-	// Create random index buffers
-	int rand_a, rand_b;
-
-	// For given number of times
-	for (int i = 0; i < times; ++i)
-	{
-		// Create two distinct random indeces from 0 to length - 1
-		do
-		{
-			rand_a = rand() % length;
-			rand_b = rand() % length;
-		} 
-		while (rand_a == rand_b);
-
-		// Swap array at random indeces
-		swap(array, rand_a, rand_b);
-	}
-}
-
-/**
- * Sorts the values in the given array with the given length in ascending order
- *
- * Parameter: array  - the array to sort
- * Parameter: length - the length of the array to sort
- */
-int insertion_sort(int array[], int length)
-{
-	// Initialize swap counter
-	int swaps = 0;
-
-	// For each position after the first
-	for (int curnt = 1; curnt < length; curnt++)
-	{
-		// Move element at curnt to it's sorted position in the array
-		// Indicating the number of swaps
-		int i = curnt;
-		while (array[i] < array[i - 1])
-		{
-			swap(array, i, i - 1);
-			swaps++;
-			i--;
-		}
-	}
-
-	// Return the number of swaps
-	return swaps;
 }

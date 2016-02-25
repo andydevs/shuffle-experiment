@@ -1,16 +1,28 @@
-TARGET=shuffle_experiment
+TARGET = shuffle_experiment
 
-CC=gcc
-CFLAGS = -std=c11
-LFLAGS = -std=c11
+CC = gcc
 
-OBJECTS=shuffle_experiment.o
+COMPILE = $(CC) -c
+LINK = $(CC)
 
-$(TARGET): $(OBJECTS)
-	$(CC) $< -o $@ $(LFLAGS)
+CFLAGS = -Wall -std=c11
+LFLAGS = -Wall
 
-.c.o:
-	$(CC) -c $< -o $@ $(CFLAGS)
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
+
+SOURCES = $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*/*.c) 
+OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SOURCES))
+BINARY  = $(BINDIR)/$(TARGET)
+
+$(BINARY): $(OBJECTS)
+	test -d $(@D) || mkdir $(@D)
+	$(LINK) $? -o $@ $(LFLAGS)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	test -d $(@D) || mkdir $(@D)
+	$(COMPILE) $< -o $@ $(CFLAGS)
 
 clean:
-	rm $(OBJECTS) $(TARGET) $(TARGET).exe.stackdump data.csv
+	rm -r $(OBJDIR) $(BINDIR)
