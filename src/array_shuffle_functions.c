@@ -2,6 +2,7 @@
 #include "program_constants.h"
 
 #include <stdlib.h>
+#include <math.h>
 
 /**
  * Swaps the two values at the given indeces with each other in the array
@@ -52,7 +53,7 @@ void shuffle(int array[], int length, int times)
  * Parameter: array  - the array to sort
  * Parameter: length - the length of the array to sort
  */
-int insertion_sort(int array[], int length)
+int sort(int array[], int length)
 {
 	// Initialize swap counter
 	int swaps = 0;

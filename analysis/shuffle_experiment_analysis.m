@@ -38,7 +38,7 @@ title('Entropy of Shuffles vs Array Length and Shuffle mes');
 
 %% Section 3: Entropy vs shuffle times for largest array size
 
-% Plot entropy vs shuffle times for largest array size
+% Plot entropy vs shuffle times for largest array size and best fit line
 figure(2);
 semilogx(shuffles,Data(end,:),'b');
 xlabel('Shuffle Times');

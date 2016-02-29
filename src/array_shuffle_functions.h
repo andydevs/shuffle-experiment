@@ -21,19 +21,6 @@ void swap(int array[], int a, int b);
 void shuffle(int array[], int length, int times);
 
 /**
- * Returns the square of the linear correlation coefficient of the array of integer values
- * with respect to the indeces. The linear correlation coefficient describes how well the
- * array of integer values fits a linear trend.
- *
- * Parameter: array - the array to determine the correlation coefficient of
- * Parameter: length - the length of the array to determine the correlation coefficient of
- *
- * Returns: the square of the linear correlation coefficient of the array of integer values
- * 			with respect to the indeces.
- */
-double square_correlation(int array[], int length);
-
-/**
  * Sorts the values in the given array with the given length in ascending order
  *
  * Parameter: array  - the array to sort
@@ -41,6 +28,6 @@ double square_correlation(int array[], int length);
  *
  * Returns: the number of swaps made to sort the array
  */
-int insertion_sort(int array[], int length);
+int sort(int array[], int length);
 
 #endif
