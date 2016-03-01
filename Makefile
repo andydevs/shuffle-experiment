@@ -17,6 +17,8 @@ SOURCES = $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*/*.c)
 OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SOURCES))
 BINARY  = $(BINDIR)/$(TARGET)
 
+INSTALLDIR = /usr/local/bin
+
 $(BINARY): $(OBJECTS)
 	test -d $(@D) || mkdir $(@D)
 	$(LINK) $? -o $@ $(LFLAGS)
@@ -27,3 +29,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPENDS)
 
 clean:
 	rm -r $(OBJDIR) $(BINDIR)
+
+install:
+	cp $(BINDIR)/$(TARGET) $(INSTALLDIR)
+
+uninstall:
+	rm $(INSTALLDIR)/$(TARGET)
+
+run:
+	$(BINARY)
