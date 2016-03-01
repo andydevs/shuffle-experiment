@@ -2,6 +2,21 @@
 #define _PROGRAM_CONSTANTS_H_
 
 /**
+ * The default filepath of the files
+ */
+#define DEFAILT_FILEPATH ".\\analysis"
+
+/**
+ * The name of the file containing data
+ */
+#define DATA_FILENAME "\\data.csv"
+
+/**
+ * The name of the file containing options
+ */
+#define OPTIONS_FILENAME "\\options.csv"
+
+/**
  * Minimum number of shuffle times to test
  */
 const int SHUFFLE_TIMES_MIN;

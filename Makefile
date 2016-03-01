@@ -6,7 +6,7 @@ COMPILE = $(CC) -c
 LINK = $(CC)
 
 CFLAGS = -std=c11
-LFLAGS = 
+LFLAGS = -std=c11
 
 SRCDIR = src
 OBJDIR = obj

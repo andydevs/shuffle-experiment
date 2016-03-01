@@ -1,26 +1,11 @@
-#include "program_constants.h"
 #include "array_shuffle_functions.h"
+#include "program_constants.h"
 
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-/**
- * The default filepath of the files
- */
-#define DEFAILT_FILEPATH ".\\analysis"
-
-/**
- * The name of the file containing data
- */
-#define DATA_FILENAME "\\data.csv"
-
-/**
- * The name of the file containing options
- */
-#define OPTIONS_FILENAME "\\options.csv"
 
 /**
  * The data and option files to write
