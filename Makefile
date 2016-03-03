@@ -27,6 +27,8 @@ BINARY  = $(BINDIR)/$(TARGET)
 
 INSTALLDIR = /usr/local/bin
 
+SPECIALS = analysis/data.csv
+
 $(BINARY): $(OBJECTS)
 	test -d $(@D) || mkdir $(@D)
 	$(LINK) $? -o $@ $(LFLAGS)
@@ -36,7 +38,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPENDS)
 	$(COMPILE) $< -o $@ $(CFLAGS)
 
 clean:
-	rm -r $(OBJDIR) $(BINDIR)
+	rm -r $(OBJDIR) $(BINDIR) $(SPECIALS)
 
 install:
 	cp $(BINDIR)/$(TARGET) $(INSTALLDIR)

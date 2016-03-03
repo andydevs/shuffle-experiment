@@ -38,6 +38,6 @@ void shuffle(int array[], int length, int times);
  *
  * Returns: the number of swaps made to sort the array
  */
-int sort(int array[], int length);
+int insertion_sort(int array[], int length);
 
 #endif

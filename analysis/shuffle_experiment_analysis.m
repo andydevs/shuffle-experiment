@@ -18,7 +18,7 @@
 %    The third plot is a linear plot that displays entropy with 
 %    repsect to array size for the most amount of shuffle times
 
-%% Section 1: Data reading
+%% Section 1: Data initialization
 
 % Read options into vector
 options = dlmread('options.csv', ',');
@@ -31,49 +31,43 @@ shuffles = options(1):options(2);
 lengths = options(3):options(4);
 trials = options(5);
 
-%% Section 2: Entropy vs array length and shuffle Times
-
 % Construct surface plot axes from options
 [Shuffles, Lengths] = meshgrid(shuffles, lengths);
 
+%% Section 2: Entropy vs array length and shuffle Times
+
 % Plot Data wrt Lengths and Shuffles
-figure;
+figure(1);
 surf(Lengths, Shuffles, Data);
 xlabel('Array Length');
 ylabel('Shuffle Times');
-zlabel('Entropy (number of swaps)');
-title('Entropy of Shuffles vs Array Length and Shuffle Times');
+zlabel('Randomness (number of swaps)');
+title('Randomness of Shuffles vs Array Length and Shuffle Times');
 
 %% Section 3: Entropy vs shuffle times for largest array size
 
 % Get best fit line (logarithm plot)
-shuffles_fit = polyfit(log(shuffles), Data(end,:), 1);
-
-% Display curve coefficients
-display(shuffles_fit);
+shuffles_fit = polynomial_fit(log(shuffles), Data(end,:), 1);
 
 % Plot entropy vs shuffle times for largest array size and best fit line
-figure;
-semilogx(shuffles,Data(end,:),'blue', shuffles, polyval(shuffles_fit, log(shuffles)), 'black');
-title(['Entropy of Shuffles vs Shuffle Times for Largest Array Length (' num2str(shuffles(end)) ')']);
+figure(2);
+semilogx(shuffles,Data(end,:),'blue', shuffles, polynomial_value(shuffles_fit, log(shuffles)), 'black');
+title(['Randomness vs Shuffle Times for Largest Array Length (' num2str(shuffles(end)) ')']);
 xlabel('Shuffle Times');
-ylabel('Entropy (number of swaps)');
+ylabel('Randomness (number of swaps)');
 legend('Raw Data', 'Best Fit Curve');
 
 %% Section 4: Entropy vs array length for most shuffle times
 
 % Find best fit polynomial curve
-arrays_fit = polyfit(lengths, Data(:,end)', 3);
-
-% Display curve coefficients
-display(arrays_fit);
+arrays_fit = polynomial_fit(lengths, Data(:,end)', 3);
 
 % Plot entropy vs array size for most shuffle times
-figure;
-plot(lengths,Data(:,end),'red', lengths, polyval(arrays_fit,lengths),'black');
-title(['Entropy of Shuffles vs Array Size for Most Shuffle Times (' num2str(lengths(end)) ')']);
+figure(3);
+plot(lengths,Data(:,end),'red', lengths, polynomial_value(arrays_fit,lengths),'black');
+title(['Randomness vs Array Size for Most Shuffle Times (' num2str(lengths(end)) ')']);
 xlabel('Array Size');
-ylabel('Entropy (number of swaps)');
+ylabel('Randomness (number of swaps)');
 legend('Raw Data', 'Best Fit Curve');
 
 %% Section 5: clean up

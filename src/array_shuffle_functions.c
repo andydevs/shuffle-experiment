@@ -63,22 +63,22 @@ void shuffle(int array[], int length, int times)
  * Parameter: array  - the array to sort
  * Parameter: length - the length of the array to sort
  */
-int sort(int array[], int length)
+int insertion_sort(int array[], int length)
 {
 	// Initialize swap counter
 	int swaps = 0;
 
 	// For each position after the first
-	for (int curnt = 1; curnt < length; curnt++)
+	for (int i = 1; i < length; i++)
 	{
-		// Move element at curnt to it's sorted position in the array
+		// Move element at i to it's sorted position in the array
 		// Indicating the number of swaps
-		int i = curnt;
-		while (array[i] < array[i - 1])
+		int spot = i;
+		while (array[spot] < array[spot - 1])
 		{
-			swap(array, i, i - 1);
+			swap(array, spot, spot - 1);
 			swaps++;
-			i--;
+			spot--;
 		}
 	}
 
