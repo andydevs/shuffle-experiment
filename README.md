@@ -12,7 +12,7 @@ This is an experiment to determine how many times a sorted array of arbitrary le
 
 ## Usage
 ### Note
-This program has only been compiled for a 64-bit Unix system. So, if you have a 64-bit computer running Mac OS or Linux, you can run "bin/shuffle_experiment". 
+This program has only been compiled for a 64-bit Unix system. So, if you have a 64-bit computer running Mac OS or Linux, you can run "bin/shuffle_experiment" from the terminal.
 
 ### Using MATLAB code
 Run "shuffle_experiment_analysis.m" in the analysis folder. This will read the data and options and plot three graphs of the data.
