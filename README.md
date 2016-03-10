@@ -15,4 +15,4 @@ This is an experiment to determine how many times a sorted array of arbitrary le
 This program has only been compiled for a 64-bit Unix system. So, if you have a 64-bit computer running Mac OS or Linux, you can run "bin/shuffle_experiment". 
 
 ### Using MATLAB code
-Run shuffle_experiment_analysis.m in the analysis folder. This will read the data and options and plot three graphs of the data.
+Run "shuffle_experiment_analysis.m" in the analysis folder. This will read the data and options and plot three graphs of the data.
