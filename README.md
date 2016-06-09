@@ -13,15 +13,20 @@ I've created an algorithm that takes two random inceces in the array and swaps t
 This is an experiment to determine how many times a sorted array of arbitrary length must be shuffled to produce the maximum "randomness" in the array.
 
 ## Usage
-If you'd like to run this code here is how!
+If you'd like to run this code for yourself here is how:
 
 ### Note
-This program has only been compiled for a 64-bit Unix system. So, if you have a 64-bit computer running Mac OS or Linux, you can run "bin/shuffle_experiment" from the terminal.
+This program has only been compiled for a 64-bit Unix system (either Mac or Linux, or Windows with a Unix shell). Also, this program uses make to build and run. Make sure you have that installed.
 
 ### Download
 Simply download a .zip or a .tar.gz of the code and unpack it. In it you'll find the code needed to run the program. Keep the folder structure as is.
 
 ### Experiment Configuration
+Within the analysis folder, you will find a file named "options.csv". You will use this file to configure the experiment.
+
+Options
+1: The minimum shuffle times
+2: The maximum
 
 ### Using MATLAB code
 Run "shuffle_experiment_analysis.m" in the analysis folder. This will read the data and options and plot three graphs of the data.
